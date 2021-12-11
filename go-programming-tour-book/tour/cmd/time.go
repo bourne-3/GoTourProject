@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"log"
 	"strconv"
@@ -17,22 +18,19 @@ var timeCmd = &cobra.Command{
 	Use:   "time",
 	Short: "时间格式处理",
 	Long:  "时间格式处理",
-	Run: func(cmd *cobra.Command, args []string) {
-
-	},
+	Run:   func(cmd *cobra.Command, args []string) {},
 }
 
-// 注册
 func init() {
-	timeCmd.AddCommand(nowCmd)
+	timeCmd.AddCommand(nowTimeCmd)
 	timeCmd.AddCommand(calculateTimeCmd)
 
 	calculateTimeCmd.Flags().StringVarP(&calculateTime, "calculate", "c", "", ` 需要计算的时间，有效单位为时间戳或已格式化后的时间 `)
 	calculateTimeCmd.Flags().StringVarP(&duration, "duration", "d", "", ` 持续时间，有效时间单位为"ns", "us" (or "µ s"), "ms", "s", "m", "h"`)
 }
 
-var nowCmd = &cobra.Command{
-	Use:   "now",
+var nowTimeCmd = &cobra.Command{
+	Use:   "now", // 这里的now就是对应命令行，耶
 	Short: "获取当前时间",
 	Long:  "获取当前时间",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -40,7 +38,6 @@ var nowCmd = &cobra.Command{
 		log.Printf("输出结果: %s, %d", nowTime.Format("2006-01-02 15:04:05"), nowTime.Unix())
 	},
 }
-
 var calculateTimeCmd = &cobra.Command{
 	Use:   "calc",
 	Short: "计算所需时间",
@@ -48,6 +45,7 @@ var calculateTimeCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var currentTimer time.Time
 		var layout = "2006-01-02 15:04:05"
+		fmt.Println("Debug", calculateTime)
 		if calculateTime == "" {
 			currentTimer = timer.GetNowTime()
 		} else {
@@ -57,7 +55,7 @@ var calculateTimeCmd = &cobra.Command{
 				layout = "2006-01-02"
 			}
 			if space == 1 {
-				layout = "2006-01-02 15:04"
+				layout = "2006-01-02 15:04:05"
 			}
 			currentTimer, err = time.Parse(layout, calculateTime)
 			if err != nil {
