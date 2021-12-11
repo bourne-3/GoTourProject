@@ -15,3 +15,6 @@ WordConvert (Cobra)
 - Bug
   - 在测试四种单词的转换模式的功能的时候，是用go run ... 没有把所有涉及的文件都写上去。一直出现unknown shorthand flag:
     - 把word包也加上去 就可以了
+
+
+Time
