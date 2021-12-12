@@ -13,10 +13,10 @@ import (
 	"time"
 )
 
-// @title 博客系统
+// @title Bourne博客系统
 // @version 1.0
-// @description Go 语言编程之旅：一起用 Go 做项目
-// @termsOfService https://github.com/go-programming-tour-book
+// @description  书本《Go语言变成之旅》的代码实现
+// @termsOfService https://github.com/bourne-3
 func main() {
 
 	// way1
