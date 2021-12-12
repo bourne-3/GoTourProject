@@ -11,8 +11,8 @@ func NewRouter() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
-	article := v1.NewArticle()
 	tag := v1.NewTag()
+	article := v1.NewArticle()
 
 	apiv1 := r.Group("/api/v1")
 
