@@ -35,6 +35,7 @@ func BindAndValid(c *gin.Context, v interface{}) (bool, ValidErrors) {
 	var errs ValidErrors
 	err := c.ShouldBind(v)
 	if err != nil {
+		// 当发生错误后，再通过上一步在中间件 Translations 设置的 Translator 来对错误消息体进行具体的翻译行为。
 		v := c.Value("trans")
 		trans, _ := v.(ut.Translator)
 		verrs, ok := err.(val.ValidationErrors)
